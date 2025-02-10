@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":141:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:2:{s:35:"Test_Controller_Welcome::test_index";d:0.005;s:30:"Test_Model_Welcome::test_index";d:0.002;}}}
