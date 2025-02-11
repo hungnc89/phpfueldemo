@@ -6,7 +6,7 @@
 				<button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<p>Modal body text goes here.</p>
+				<p>Are you sure delete this customer?</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Cancel</button>
