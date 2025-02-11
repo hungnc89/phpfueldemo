@@ -18,7 +18,7 @@ class Repository_Base implements Repository_Base_Interface
 		return $this->model->query()->rows_limit($limit)->offset(($page-1)*$limit)->order_by('id', 'DESC')->get();
 	}
 
-	public function get_by_id($id)
+	public function get_by_id(int $id)
 	{
 		return $this->model->find($id);
 	}
@@ -31,6 +31,11 @@ class Repository_Base implements Repository_Base_Interface
 		}
 
 		return $this->model->save();
+	}
+
+	public function delete(int $id)
+	{
+		$this->model->find($id)->delete();
 	}
 
 	public function total_pages()

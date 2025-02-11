@@ -1,8 +1,8 @@
 <?php
 
 
+use Fuel\Core\Format;
 use Fuel\Core\Input;
-use Fuel\Core\Presenter;
 use Fuel\Core\Response;
 use Fuel\Core\Session;
 use Fuel\Core\Uri;
@@ -40,6 +40,7 @@ class Controller_Customer extends Controller_Base
 
 		$content_data = [
 			'create_customer_success' => Session::get_flash('create_customer_success'),
+			'delete_customer_success' => Session::get_flash('delete_customer_success'),
 			'current_page' => $current_page,
 			'list_customers' => $this->customer_repo->get_page($current_page),
 		];
@@ -206,5 +207,35 @@ class Controller_Customer extends Controller_Base
 
 		$this->template->title_page = self::TITLE_PAGE_CUSTOMER_EDIT;
 		$this->template->content = View::forge('customer/edit_view', $content_data);
+	}
+
+	public function action_ajax_delete_process()
+	{
+		$msg_error = '';
+		$success = true;
+		$status_code = 200;
+		$customer_id = Input::json('id');
+
+		try {
+			$this->customer_repo->delete($customer_id);
+		}
+		catch (Exception $e) {
+			$success = false;
+			$msg_error = 'Error deleting customer record: ' . $customer_id;
+		}
+
+		$response_data = [
+			'success' => $success,
+		];
+
+		if (!$success) {
+			$response_data['error'] = $msg_error;
+		}
+		else
+		{
+			Session::set_flash('delete_customer_success', true);
+		}
+
+		return Response::forge(Format::forge($response_data)->to_json(), $status_code);
 	}
 }

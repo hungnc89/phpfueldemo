@@ -2,11 +2,12 @@
 
 use Auth\Auth;
 use Fuel\Core\Controller_Template;
+use Fuel\Core\Controller_Hybrid;
 use Fuel\Core\Response;
 use Fuel\Core\Uri;
 use Fuel\Core\View;
 
-class Controller_Base extends Controller_Template
+class Controller_Base extends Controller_Hybrid
 {
 	protected int $_header_status = 200;
 	protected string $_title_page = 'Demo FuelPhp';

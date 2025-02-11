@@ -57,4 +57,8 @@ return array(
 		['GET' , new Route('customer/edit_view')],
 		['POST' , new Route('customer/edit_process')],
 	],
+
+	'customer/delete' => [
+		['POST' , new Route('customer/ajax_delete_process')],
+	],
 );

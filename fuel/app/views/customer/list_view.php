@@ -1,3 +1,21 @@
+<div class="modal fade" id="modal-confirm-delete" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Confirm customer delete</h5>
+				<button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Modal body text goes here.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary btn-confirm-delete">Confirm</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <?php if (!empty($create_customer_success)): ?>
 <div class="toast-container position-fixed top-0 end-0 p-3">
 	<div id="toast-create-user-success" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
@@ -6,6 +24,16 @@
 		</div>
 	</div>
 </div>
+<?php endif; ?>
+
+<?php if (!empty($delete_customer_success)): ?>
+	<div class="toast-container position-fixed top-0 end-0 p-3">
+		<div id="toast-delete-user-success" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="toast-body">
+				Delete customer success!
+			</div>
+		</div>
+	</div>
 <?php endif; ?>
 
 <div class="card">
@@ -27,7 +55,7 @@
 			<?php
 			/** @var array $list_customers */
 			foreach ($list_customers as $customer): ?>
-				<tr>
+				<tr data-customer-row="<?php echo $customer->id; ?>">
 					<th scope="row"><?php echo $customer->id; ?></th>
 					<td><?php echo $customer->name; ?></td>
 					<td><?php echo $customer->email; ?></td>
@@ -37,7 +65,7 @@
 							<button type="button" class="btn btn-primary btn-customer-edit" data-url="<?php echo Uri::create('/customer/edit',[], ['id' => $customer->id]); ?>">
 								<i class="icon icon-sm cil-zoom"></i>
 							</button>
-							<button type="button" class="btn btn-danger" data-url="<?php echo Uri::create('/customer/edit/'.$customer->id); ?>">
+							<button type="button" class="btn btn-danger btn-customer-delete" data-url="<?php echo Uri::create('/customer/delete'); ?>" data-id="<?php echo $customer->id; ?>">
 								<i class="icon icon-sm cil-trash"></i>
 							</button>
 						</div>
